@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MANIFEST="/usr/share/kyty/packages/desktop-xfce.txt"
+
+if [[ $EUID -ne 0 ]]; then
+    echo "Run this installer with sudo."
+    exit 1
+fi
+
+if [[ ! -f "$MANIFEST" ]]; then
+    echo "Kyty desktop package manifest not found."
+    exit 1
+fi
+
+mapfile -t PACKAGES < <(
+    grep -Ev '^[[:space:]]*(#|$)' "$MANIFEST"
+)
+
+echo "Installing Kyty Sakura Desktop..."
+
+pacman -Syu --needed "${PACKAGES[@]}"
+
+echo "Desktop packages installed."
+echo "You can now configure and launch XFCE."

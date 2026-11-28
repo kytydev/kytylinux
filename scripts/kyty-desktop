@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo ""
+echo "  ✿ KYTY LINUX — SAKURA DESKTOP"
+echo ""
+
+if ! command -v startxfce4 >/dev/null 2>&1; then
+    echo "Install the optional Kyty desktop first."
+    exit 1
+fi
+
+echo "Starting Kyty Sakura Desktop..."
+
+exec startxfce4

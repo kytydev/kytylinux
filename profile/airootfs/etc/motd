@@ -1,0 +1,21 @@
+================================
+       KYTY LINUX 0.1.0
+================================
+
+Welcome to Kyty Linux.
+
+A lightweight Arch-based gaming OS.
+
+System:
+  Hostname: kyty
+  Shell: Zsh
+
+Useful commands:
+  kyty-info       System information
+  kyty-desktop    Launch Kyty Sakura Desktop
+  kyty-install    Start Kyty installer
+
+Documentation:
+  https://github.com/kytydev/kytylinux
+
+Enjoy Kyty Linux!

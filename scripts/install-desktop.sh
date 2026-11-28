@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+manifest="$(dirname -- "${BASH_SOURCE[0]}")/../packages/desktop-xfce.txt"
+
+echo "  ✿ KYTY LINUX - SAKURA DESKTOP"
+
+if ! command -v pacman >/dev/null 2>&1; then
+    echo "Error: pacman was not found." >&2
+    exit 1
+fi
+
+if ! packages=$(grep -Ev '^[[:space:]]*(#|$)' "$manifest"); then
+    echo "No packages found in $manifest." >&2
+    exit 1
+fi
+mapfile -t packages <<< "$packages"
+
+pacman_command=(pacman)
+if (( EUID != 0 )); then
+    pacman_command=(sudo pacman)
+fi
+
+echo "Installing XFCE desktop environment..."
+"${pacman_command[@]}" -Syu --needed "${packages[@]}"
+
+echo "XFCE installation complete. Run kyty-desktop from a terminal to start it."
